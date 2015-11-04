@@ -64,6 +64,7 @@ static const CGFloat kSpeedNotSet = -1.0;
 @property (nonatomic) BOOL readyToExposeDistanceAndSpeed;
 @property (nonatomic) BOOL checkingSignalStrength;
 @property (nonatomic) BOOL allowMaximumAcceptableAccuracy;
+@property (nonatomic, assign) CLAuthorizationStatus autorizationLevelRequired;
 
 - (void)checkSustainedSignalStrength;
 - (void)requestNewLocation;
@@ -92,6 +93,7 @@ static const CGFloat kSpeedNotSet = -1.0;
 @synthesize readyToExposeDistanceAndSpeed = _readyToExposeDistanceAndSpeed;
 @synthesize allowMaximumAcceptableAccuracy = _allowMaximumAcceptableAccuracy;
 @synthesize checkingSignalStrength = _checkingSignalStrength;
+@synthesize autorizationLevelRequired;
 
 + (id)sharedLocationManager {
     static dispatch_once_t pred;
@@ -196,7 +198,11 @@ static const CGFloat kSpeedNotSet = -1.0;
     [self.locationManager startUpdatingLocation];
 }
 
-- (BOOL)prepLocationUpdates {
+- (BOOL)prepLocationUpdates
+{
+    return  [self prepLocationUpdatesWithAuthorizationLevelRequired:kCLAuthorizationStatusAuthorizedAlways];
+}
+- (BOOL)prepLocationUpdatesWithAuthorizationLevelRequired: (CLAuthorizationStatus) authLevelRequired {
     if ([CLLocationManager locationServicesEnabled]) {
         [self.locationHistory removeAllObjects];
         [self.speedHistory removeAllObjects];
@@ -205,6 +211,7 @@ static const CGFloat kSpeedNotSet = -1.0;
         self.readyToExposeDistanceAndSpeed = NO;
         self.signalStrength = PSLocationManagerGPSSignalStrengthInvalid;
         self.allowMaximumAcceptableAccuracy = NO;
+        self.autorizationLevelRequired = authLevelRequired;
         
         self.forceDistanceAndSpeedCalculation = YES;
         [self.locationManager startUpdatingLocation];
@@ -221,7 +228,7 @@ static const CGFloat kSpeedNotSet = -1.0;
 - (BOOL)startLocationUpdates {
     if ([CLLocationManager locationServicesEnabled]) {
         self.readyToExposeDistanceAndSpeed = YES;
-        
+        [self askForAuthorization];
         [self.locationManager startUpdatingLocation];
         [self.locationManager startUpdatingHeading];
         
@@ -252,7 +259,27 @@ static const CGFloat kSpeedNotSet = -1.0;
     self.pauseDeltaStart = 0;
 }
 
+
+- (void) askForAuthorization
+{
+    if(autorizationLevelRequired == kCLAuthorizationStatusAuthorizedAlways)
+    {
+        [self.locationManager requestAlwaysAuthorization];
+    }else if(autorizationLevelRequired == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+}
+
 #pragma mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if ([self.delegate respondsToSelector:@selector(locationManager:didChangeAuthorizationStatus:)]) {
+        [self.delegate locationManager:self didChangeAuthorizationStatus:status];
+    }
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     // since the oldLocation might be from some previous use of core location, we need to make sure we're getting data from this run

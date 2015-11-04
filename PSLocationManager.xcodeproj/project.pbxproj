@@ -17,6 +17,8 @@
 		04EFB2E614F4A89300715B64 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFB2E414F4A89300715B64 /* ViewController_iPhone.xib */; };
 		04EFB2E914F4A89300715B64 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EFB2E714F4A89300715B64 /* ViewController_iPad.xib */; };
 		04EFB2F314F4AFBD00715B64 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB2F014F4A8C300715B64 /* PSLocationManager.m */; };
+		ED0A73AC1BEA449400978E37 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED0A73AB1BEA449400978E37 /* Default-568h@2x.png */; };
+		ED0A73AD1BEA462100978E37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFB2F114F4A99700715B64 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,7 @@
 		04EFB2EF14F4A8C300715B64 /* PSLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		04EFB2F014F4A8C300715B64 /* PSLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 		04EFB2F114F4A99700715B64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ED0A73AB1BEA449400978E37 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED0A73AD1BEA462100978E37 /* CoreLocation.framework in Frameworks */,
 				04EFB2D014F4A89300715B64 /* UIKit.framework in Frameworks */,
 				04EFB2D214F4A89300715B64 /* Foundation.framework in Frameworks */,
 				04EFB2D414F4A89300715B64 /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +60,7 @@
 		04EFB2C014F4A89200715B64 = {
 			isa = PBXGroup;
 			children = (
+				ED0A73AB1BEA449400978E37 /* Default-568h@2x.png */,
 				04EFB2D514F4A89300715B64 /* PSLocationManager */,
 				04EFB2CE14F4A89300715B64 /* Frameworks */,
 				04EFB2CC14F4A89300715B64 /* Products */,
@@ -159,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EFB2DA14F4A89300715B64 /* InfoPlist.strings in Resources */,
+				ED0A73AC1BEA449400978E37 /* Default-568h@2x.png in Resources */,
 				04EFB2E614F4A89300715B64 /* ViewController_iPhone.xib in Resources */,
 				04EFB2E914F4A89300715B64 /* ViewController_iPad.xib in Resources */,
 			);
@@ -261,6 +267,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSLocationManager/PSLocationManager-Prefix.pch";
 				INFOPLIST_FILE = "PSLocationManager/PSLocationManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -272,6 +279,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PSLocationManager/PSLocationManager-Prefix.pch";
 				INFOPLIST_FILE = "PSLocationManager/PSLocationManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
