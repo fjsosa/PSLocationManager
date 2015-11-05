@@ -113,6 +113,20 @@ static const CGFloat kSpeedNotSet = -1.0;
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             self.locationManager.distanceFilter = kDistanceFilter;
             self.locationManager.headingFilter = kHeadingFilter;
+            
+            //FSO, adapting this pod for iOS 9, thank you apple! you rock!
+            
+            if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9)
+            {
+                BOOL yes = YES;
+                NSMethodSignature* signature = [[CLLocationManager class] instanceMethodSignatureForSelector:@selector(setAllowsBackgroundLocationUpdates:)];
+                NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
+                [invocation setTarget:self.locationManager];
+                [invocation setSelector:@selector(setAllowsBackgroundLocationUpdates:)];
+                [invocation setArgument:&yes atIndex:2];
+                [invocation invoke];
+            }
+            
         }
         
         self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];

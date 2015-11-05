@@ -50,7 +50,6 @@ typedef enum {
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error;
 - (void)locationManager:(PSLocationManager *)locationManager debugText:(NSString *)text;
 - (void)locationManager:(PSLocationManager *)locationManager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
-
 @end
 
 @interface PSLocationManager : NSObject <CLLocationManagerDelegate>
