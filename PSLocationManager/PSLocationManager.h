@@ -62,7 +62,9 @@ typedef enum {
 
 + (PSLocationManager *)sharedLocationManager;
 
-- (BOOL)prepLocationUpdates; // this must be called before startLocationUpdates (best to call it early so we can get an early lock on location)
+- (BOOL)prepLocationUpdates;
+- (BOOL)prepLocationUpdatesWithAuthorizationLevelRequired:(CLAuthorizationStatus) authLevelRequired; // this must be called before startLocationUpdates (best to call it early so we can get an early lock on location)
+
 - (BOOL)startLocationUpdates;
 - (void)stopLocationUpdates;
 - (void)resetLocationUpdates;
