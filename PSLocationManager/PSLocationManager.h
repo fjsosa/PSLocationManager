@@ -68,5 +68,5 @@ typedef enum {
 - (BOOL)startLocationUpdates;
 - (void)stopLocationUpdates;
 - (void)resetLocationUpdates;
-
+- (void)askForAuthorization;
 @end
